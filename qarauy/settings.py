@@ -14,10 +14,15 @@ SECRET_KEY = os.environ.get(
     "django-insecure-+*+b1_c8doenqpz%lmoc+fm+y*1=!q^-a3k5#m08(3*n2@&$7d",
 )
 
-# PythonAnywhere sets PYTHONANYWHERE_DOMAIN automatically on web apps
+# PythonAnywhere: USER env var = username (e.g. developer123123)
 PA_DOMAIN = os.environ.get("PYTHONANYWHERE_DOMAIN")
+PA_USERNAME = os.environ.get("USER", "")
+if not PA_DOMAIN and PA_USERNAME:
+    PA_DOMAIN = f"{PA_USERNAME}.pythonanywhere.com"
 
-DEBUG = PA_DOMAIN is None
+ON_PYTHONANYWHERE = PA_DOMAIN is not None and PA_DOMAIN.endswith(".pythonanywhere.com")
+
+DEBUG = not ON_PYTHONANYWHERE
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 if PA_DOMAIN:
