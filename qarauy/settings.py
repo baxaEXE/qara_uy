@@ -2,17 +2,30 @@
 Django settings for qarauy project.
 """
 
+import os
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-+*+b1_c8doenqpz%lmoc+fm+y*1=!q^-a3k5#m08(3*n2@&$7d"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-+*+b1_c8doenqpz%lmoc+fm+y*1=!q^-a3k5#m08(3*n2@&$7d",
+)
 
-DEBUG = True
+# PythonAnywhere sets PYTHONANYWHERE_DOMAIN automatically on web apps
+PA_DOMAIN = os.environ.get("PYTHONANYWHERE_DOMAIN")
+
+DEBUG = PA_DOMAIN is None
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+if PA_DOMAIN:
+    ALLOWED_HOSTS.append(PA_DOMAIN)
+
+CSRF_TRUSTED_ORIGINS = []
+if PA_DOMAIN:
+    CSRF_TRUSTED_ORIGINS.append(f"https://{PA_DOMAIN}")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
