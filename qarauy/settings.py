@@ -24,13 +24,22 @@ ON_PYTHONANYWHERE = PA_DOMAIN is not None and PA_DOMAIN.endswith(".pythonanywher
 
 DEBUG = not ON_PYTHONANYWHERE
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-if PA_DOMAIN:
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "developer123123.pythonanywhere.com",
+    ".pythonanywhere.com",
+]
+if PA_DOMAIN and PA_DOMAIN not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(PA_DOMAIN)
 
-CSRF_TRUSTED_ORIGINS = []
+CSRF_TRUSTED_ORIGINS = [
+    "https://developer123123.pythonanywhere.com",
+]
 if PA_DOMAIN:
-    CSRF_TRUSTED_ORIGINS.append(f"https://{PA_DOMAIN}")
+    origin = f"https://{PA_DOMAIN}"
+    if origin not in CSRF_TRUSTED_ORIGINS:
+        CSRF_TRUSTED_ORIGINS.append(origin)
 
 INSTALLED_APPS = [
     "django.contrib.admin",
