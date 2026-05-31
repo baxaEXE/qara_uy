@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="hero hero-product">
+  <div class="container">
+    <p class="breadcrumb"><a href="{% url 'catalogue:catalogue' %}">{% trans "Catalogue" %}</a> / {{ product.name }}</p>
+  </div>
+</section>
+
+<section class="section product-detail">
+  <div class="container product-detail-grid">
+    <div class="product-detail-media">
+      {% if product.image %}
+      <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-detail-image">
+      {% else %}
+      <div class="product-placeholder product-placeholder-lg">
+        <span class="diameter-badge">{{ product.diameter_display }}</span>
+      </div>
+      {% endif %}
+    </div>
+    <div class="product-detail-info">
+      <p class="product-diameter">{{ product.diameter_display }}{% if product.is_tall %} · {% trans "Tall" %}{% endif %}</p>
+      <h1>{{ product.name }}</h1>
+      {% if product.tagline %}<p class="lead">{{ product.tagline }}</p>{% endif %}
+      <p class="product-price-label">{% trans "Starting At" %}</p>
+      <p class="product-price product-price-lg">${{ product.price_usd|floatformat:2 }}</p>
+      {% if product.colors.exists %}
+      <p class="product-colors-label">{% trans "Available colors:" %}</p>
+      <ul class="color-swatches color-swatches-lg">
+        {% for color in product.colors.all %}
+        <li title="{{ color.name }}" style="{% if color.hex_code %}background:{{ color.hex_code }}{% endif %}"></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <div class="product-detail-actions">
+        <a href="{% url 'pages:contact' %}" class="btn btn-primary">{% trans "Request a Quote" %}</a>
+        <a href="{% url 'pages:gallery' %}" class="btn btn-outline">{% trans "See Gallery" %}</a>
+      </div>
+    </div>
+  </div>
+  <div class="container narrow product-description">
+    <h2>{% trans "About This Kit" %}</h2>
+    <p>{{ product.description }}</p>
+  </div>
+</section>
+{% endblock %}

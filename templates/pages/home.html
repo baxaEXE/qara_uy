@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Home" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-home">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="eyebrow">{% trans "Republic of Karakalpakstan" %}</p>
+    <h1>Qara Uy</h1>
+    <p class="hero-subtitle">{% trans "Authentic Karakalpak National Dwellings — For Sale Worldwide" %}</p>
+    <div class="hero-actions">
+      <a href="{% url 'catalogue:catalogue' %}" class="btn btn-primary">{% trans "Browse Catalogue" %}</a>
+      <a href="{% url 'pages:contact' %}" class="btn btn-outline-light">{% trans "Get Started" %}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow text-center">
+    <h2>{% trans "Living Heritage of the Amu Darya" %}</h2>
+    <p>{% trans "The qara uy is more than shelter—it is the heart of Karakalpak culture. Our master builders in Muynak and Nukus craft each dwelling with felt from local sheep, willow lattice, and ornamental shyrdak that tell stories of the steppe." %}</p>
+    <a href="{% url 'pages:history' %}" class="btn btn-text">{% trans "Read Full History →" %}</a>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "Featured Qara Uy Kits" %}</h2>
+    <div class="product-grid product-grid-sm">
+      {% for product in featured_products %}
+      {% include "catalogue/_product_card.html" %}
+      {% endfor %}
+    </div>
+    <p class="text-center" style="margin-top:2rem">
+      <a href="{% url 'catalogue:catalogue' %}" class="btn btn-primary">{% trans "View Full Catalogue" %}</a>
+    </p>
+  </div>
+</section>
+
+<section class="features section">
+  <div class="container features-grid">
+    <article>
+      <h3>{% trans "Handcrafted" %}</h3>
+      <p>{% trans "Every pole, felt layer, and door is made by Karakalpak families using traditional tools and methods." %}</p>
+    </article>
+    <article>
+      <h3>{% trans "Built to Last" %}</h3>
+      <p>{% trans "Premium wool felt and hardwood components withstand desert heat, wind, and winter cold." %}</p>
+    </article>
+    <article>
+      <h3>{% trans "Worldwide Delivery" %}</h3>
+      <p>{% trans "We ship complete kits across Central Asia, Europe, and North America with assembly support." %}</p>
+    </article>
+  </div>
+</section>
+
+<section class="section cta-gallery">
+  <div class="container text-center">
+    <h2>{% trans "Explore the Gallery" %}</h2>
+    <a href="{% url 'pages:gallery' %}" class="btn btn-primary">{% trans "Our Gallery" %}</a>
+  </div>
+</section>
+{% endblock %}

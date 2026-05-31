@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Gallery" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Gallery" %}</h1>
+    <p class="hero-subtitle">{% trans "Qara Uy Across the Steppe and Beyond" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "Our Qara Uy Models" %}</h2>
+    <div class="gallery-grid gallery-products">
+      {% for product in products %}
+      <a href="{{ product.get_absolute_url }}" class="gallery-product-card">
+        <figure class="gallery-item">
+          {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}">
+          {% else %}
+          <div class="gallery-placeholder"><span>{{ product.diameter_display }}</span></div>
+          {% endif %}
+          <figcaption>
+            <strong>{{ product.name }}</strong>
+            <span class="gallery-price">{% trans "Starting At" %} ${{ product.price_usd|floatformat:2 }}</span>
+          </figcaption>
+        </figure>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if extra_images %}
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "More Photos" %}</h2>
+    <div class="gallery-grid">
+      {% for img in extra_images %}
+      <figure class="gallery-item">
+        {% if img.image %}
+        <img src="{{ img.image.url }}" alt="{{ img.title }}">
+        {% else %}
+        <div class="gallery-placeholder"></div>
+        {% endif %}
+        {% if img.caption %}<figcaption>{{ img.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

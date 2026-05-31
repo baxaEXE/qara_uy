@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "History" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page hero-history">
+  <div class="container">
+    <h1>{% trans "History of the Qara Uy" %}</h1>
+    <p class="hero-subtitle">{% trans "From ancient steppe dwellings to living Karakalpak heritage" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow text-center">
+    <p class="lead">{% trans "The qara uy carries more than two thousand years of Karakalpak history — from the nomadic camps of the Amu Darya to the workshops of modern Nukus." %}</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "Historical Timeline" %}</h2>
+    <ol class="history-timeline">
+      {% for date, event in timeline %}
+      <li>
+        <span class="timeline-date">{{ date }}</span>
+        <span class="timeline-event">{{ event }}</span>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="section history-content">
+  <div class="container narrow">
+    {% for section in history_sections %}
+    <article id="{{ section.id }}" class="history-section">
+      <h2>{{ section.title }}</h2>
+      {% for paragraph in section.paragraphs %}
+      <p>{{ paragraph }}</p>
+      {% endfor %}
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "Our Qara Uy Collection" %}</h2>
+    <p class="text-center lead" style="margin-bottom:2rem">{% trans "Explore the qara uy models we build today — rooted in this history." %}</p>
+    <div class="product-grid">
+      {% for product in products %}
+      {% include "catalogue/_product_card.html" %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

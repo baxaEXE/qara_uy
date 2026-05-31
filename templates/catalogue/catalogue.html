@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Our Qara Uy Kits" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-catalogue">
+  <div class="container hero-content">
+    <h1>{% trans "Our Qara Uy Kits" %}</h1>
+    <p class="hero-subtitle">{% trans "By Karakalpak Master Craftsmen & Their Families" %}</p>
+    <div class="hero-actions">
+      <a href="{% url 'catalogue:catalogue' %}" class="btn btn-primary">{% trans "See All Products" %}</a>
+      <a href="{% url 'pages:gallery' %}" class="btn btn-outline-light">{% trans "See Gallery" %}</a>
+    </div>
+  </div>
+</section>
+
+<section class="section catalogue-intro">
+  <div class="container narrow">
+    <h2>{% trans "Authentic Karakalpak Dwellings" %}</h2>
+    <p>{% trans "From the first phase of production on the shores of the Aral Sea to the final stages in Nukus, every family member plays an intricate role in ensuring the fine detail and quality construction of these authentic qara uy dwellings—handed down through generations of Karakalpak nomads." %}</p>
+  </div>
+</section>
+
+<section class="section catalogue-listing">
+  <div class="container">
+    <form class="sort-bar" method="get" action="">
+      <label for="sort">{% trans "Order by:" %}</label>
+      <select name="sort" id="sort" onchange="this.form.submit()">
+        <option value="size_asc" {% if current_sort == "size_asc" %}selected{% endif %}>{% trans "Size: Small to Big" %}</option>
+        <option value="size_desc" {% if current_sort == "size_desc" %}selected{% endif %}>{% trans "Size: Big to Small" %}</option>
+        <option value="price_asc" {% if current_sort == "price_asc" %}selected{% endif %}>{% trans "Price: Low to High" %}</option>
+        <option value="price_desc" {% if current_sort == "price_desc" %}selected{% endif %}>{% trans "Price: High to Low" %}</option>
+        <option value="popularity" {% if current_sort == "popularity" %}selected{% endif %}>{% trans "Popularity" %}</option>
+      </select>
+    </form>
+
+    <div class="product-grid">
+      {% for product in products %}
+      {% include "catalogue/_product_card.html" %}
+      {% empty %}
+      <p class="empty-state">{% trans "No products available yet. Check back soon." %}</p>
+      {% endfor %}
+    </div>
+
+    {% if is_paginated %}
+    <nav class="pagination">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}&sort={{ current_sort }}">{% trans "Previous" %}</a>
+      {% endif %}
+      <span>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</span>
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}&sort={{ current_sort }}">{% trans "Next" %}</a>
+      {% endif %}
+    </nav>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section cta-gallery">
+  <div class="container text-center">
+    <h2>{% trans "Explore the Gallery" %}</h2>
+    <a href="{% url 'pages:gallery' %}" class="btn btn-primary">{% trans "Our Gallery" %}</a>
+  </div>
+</section>
+
+<section class="section cta-contact">
+  <div class="container narrow text-center">
+    <h2>{% trans "Start Your Qara Uy Journey Today" %}</h2>
+    <p>{% trans "We are always at your service—send us a message for a custom quote or any questions." %}</p>
+    <a href="{% url 'pages:contact' %}" class="btn btn-primary">{% trans "Contact Us" %}</a>
+  </div>
+</section>
+{% endblock %}

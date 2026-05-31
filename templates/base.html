@@ -1,0 +1,105 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ SITE_NAME }}{% endblock %} | {{ SITE_TAGLINE }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="{% url 'pages:home' %}" class="logo">
+        <span class="logo-mark">◉</span>
+        <span class="logo-text">{{ SITE_NAME }}</span>
+      </a>
+      {% include "includes/language_bar.html" %}
+      <button class="nav-toggle" aria-label="{% trans 'Open menu' %}" type="button">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="{% url 'pages:history' %}">{% trans "History" %}</a></li>
+          <li class="has-dropdown">
+            <a href="{% url 'catalogue:catalogue' %}">{% trans "Our Products" %}</a>
+            <ul class="dropdown">
+              <li><a href="{% url 'catalogue:catalogue' %}">{% trans "Qara Uy Kits" %}</a></li>
+              <li><a href="{% url 'pages:pricing' %}">{% trans "Pricing" %}</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'pages:delivery' %}">{% trans "Delivery" %}</a></li>
+          <li><a href="{% url 'pages:pricing' %}">{% trans "Pricing" %}</a></li>
+          <li><a href="{% url 'pages:gallery' %}">{% trans "Gallery" %}</a></li>
+          <li class="has-dropdown">
+            <a href="{% url 'pages:about' %}">{% trans "About" %}</a>
+            <ul class="dropdown">
+              <li><a href="{% url 'pages:about' %}">{% trans "About Us" %}</a></li>
+              <li><a href="{% url 'pages:anatomy' %}">{% trans "Qara Uy Anatomy" %}</a></li>
+              <li><a href="{% url 'pages:faqs' %}">{% trans "FAQs" %}</a></li>
+            </ul>
+          </li>
+        </ul>
+        <a href="{% url 'pages:contact' %}" class="btn btn-primary btn-sm">{% trans "Get Started" %}</a>
+      </nav>
+    </div>
+  </header>
+
+  {% if messages %}
+  <div class="messages-bar">
+    {% for message in messages %}
+    <p class="message message-{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main>{% block content %}{% endblock %}</main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="{% url 'pages:home' %}" class="logo logo-footer">
+          <span class="logo-mark">◉</span>
+          <span class="logo-text">{{ SITE_NAME }}</span>
+        </a>
+        <p class="footer-tagline">{{ SITE_TAGLINE }}</p>
+      </div>
+      <div>
+        <h4>{% trans "Explore" %}</h4>
+        <ul>
+          <li><a href="{% url 'pages:home' %}">{% trans "Home" %}</a></li>
+          <li><a href="{% url 'pages:history' %}">{% trans "History" %}</a></li>
+          <li><a href="{% url 'pages:delivery' %}">{% trans "Delivery" %}</a></li>
+          <li><a href="{% url 'pages:about' %}">{% trans "About" %}</a></li>
+          <li><a href="{% url 'pages:faqs' %}">{% trans "FAQs" %}</a></li>
+          <li><a href="{% url 'pages:gallery' %}">{% trans "Gallery" %}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{% trans "Catalogue" %}</h4>
+        <ul>
+          <li><a href="{% url 'catalogue:catalogue' %}">{% trans "Qara Uy Kits" %}</a></li>
+          <li><a href="{% url 'pages:pricing' %}">{% trans "Pricing" %}</a></li>
+          <li><a href="{% url 'pages:anatomy' %}">{% trans "Anatomy" %}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>{% trans "Contact" %}</h4>
+        <p>{{ CONTACT_EMAIL }}</p>
+        <p>{{ CONTACT_PHONE }}</p>
+        <p>{{ CONTACT_ADDRESS }}</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>{% trans "Copyright" %} {% now "Y" %} &copy; {{ SITE_NAME }} — {% trans "Republic of Karakalpakstan" %}</p>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

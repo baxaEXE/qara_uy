@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Delivery" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Shipping & Delivery" %}</h1>
+    <p class="hero-subtitle">{% trans "From Karakalpakstan to Your Land" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow prose">
+    <h2>{% trans "Central Asia" %}</h2>
+    <p>{% trans "Standard delivery within Uzbekistan and neighboring countries takes 2–4 weeks. We coordinate trucking from our Nukus warehouse." %}</p>
+    <h2>{% trans "International" %}</h2>
+    <p>{% trans "Sea freight to Europe and North America typically requires 8–12 weeks. Kits are packed in weather-resistant crates with labeled components." %}</p>
+    <h2>{% trans "Assembly Support" %}</h2>
+    <p>{% trans "We offer remote video guidance and optional on-site assembly teams for large orders. Contact us for a delivery quote tailored to your location." %}</p>
+    <a href="{% url 'pages:contact' %}" class="btn btn-primary">{% trans "Get a Delivery Quote" %}</a>
+  </div>
+</section>
+{% endblock %}

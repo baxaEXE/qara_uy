@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Contact Us" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Start Your Qara Uy Journey Today" %}</h1>
+    <p class="hero-subtitle">{% trans "We will happily build you a quote or answer any questions" %}</p>
+  </div>
+</section>
+
+<section class="section contact-section">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <h2>{% trans "Get in Touch" %}</h2>
+      <p><strong>{% trans "Email:" %}</strong> <a href="mailto:{{ CONTACT_EMAIL }}">{{ CONTACT_EMAIL }}</a></p>
+      <p><strong>{% trans "Phone:" %}</strong> {{ CONTACT_PHONE }}</p>
+      <p><strong>{% trans "Address:" %}</strong> {{ CONTACT_ADDRESS }}</p>
+    </div>
+    <form class="contact-form" method="post" novalidate>
+      {% csrf_token %}
+      <div class="form-row form-row-2">
+        {{ form.first_name }}
+        {{ form.last_name }}
+      </div>
+      <div class="form-row form-row-2">
+        {{ form.email }}
+        {{ form.phone }}
+      </div>
+      <div class="form-row form-row-2">
+        {{ form.country }}
+        {{ form.region }}
+      </div>
+      <div class="form-row">
+        <label for="id_intended_use">{% trans "Intended Use" %}</label>
+        {{ form.intended_use }}
+      </div>
+      <div class="form-row form-row-2">
+        <div>
+          <label for="id_subject">{% trans "Message Subject" %}</label>
+          {{ form.subject }}
+        </div>
+        <div>
+          <label for="id_preferred_contact">{% trans "Preferred Contact" %}</label>
+          {{ form.preferred_contact }}
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="id_message">{% trans "Message" %}</label>
+        {{ form.message }}
+      </div>
+      {% if form.errors %}
+      <ul class="form-errors">
+        {% for field, errors in form.errors.items %}
+        {% for error in errors %}<li>{{ error }}</li>{% endfor %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+      <button type="submit" class="btn btn-primary">{% trans "Send Message" %}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

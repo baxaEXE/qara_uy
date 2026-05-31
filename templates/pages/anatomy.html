@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Qara Uy Anatomy" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Qara Uy Anatomy" %}</h1>
+    <p class="hero-subtitle">{% trans "Understanding the Structure of a Karakalpak Dwelling" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container anatomy-grid">
+    <article class="anatomy-item">
+      <h3>{% trans "Shanyrak (Roof Wheel)" %}</h3>
+      <p>{% trans "The circular crown at the top symbolizes the sun and the unity of the family. Smoke escapes through its opening." %}</p>
+    </article>
+    <article class="anatomy-item">
+      <h3>{% trans "Uuk (Roof Poles)" %}</h3>
+      <p>{% trans "Steam-bent willow poles radiate from the shanyrak to the lattice walls, creating the iconic dome profile." %}</p>
+    </article>
+    <article class="anatomy-item">
+      <h3>{% trans "Kerege (Lattice Walls)" %}</h3>
+      <p>{% trans "Collapsible wooden lattice sections fold for transport and expand into a sturdy circular wall." %}</p>
+    </article>
+    <article class="anatomy-item">
+      <h3>{% trans "Kiyiz (Felt Covers)" %}</h3>
+      <p>{% trans "Layers of pressed sheep wool provide insulation. Outer covers are often dark (qara = black); inner liners feature shyrdak patterns." %}</p>
+    </article>
+    <article class="anatomy-item">
+      <h3>{% trans "Esik (Door)" %}</h3>
+      <p>{% trans "A low, ornate doorway encourages mindful entry. Frames are carved and painted with traditional motifs." %}</p>
+    </article>
+    <article class="anatomy-item">
+      <h3>{% trans "Shyrdak (Carpets)" %}</h3>
+      <p>{% trans "Felt carpets with geometric patterns line floors and walls, adding warmth and cultural symbolism." %}</p>
+    </article>
+  </div>
+</section>
+{% endblock %}

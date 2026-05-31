@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Pricing" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Qara Uy Pricing" %}</h1>
+    <p class="hero-subtitle">{% trans "Authentic Karakalpak dwellings — transparent starting prices" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow text-center">
+    <p class="lead">{% trans "All prices include the complete structural kit. Furnished and ornate models include interior items as shown. Contact us for delivery quotes and custom options." %}</p>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="pricing-table-wrap">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>{% trans "Model" %}</th>
+            <th>{% trans "Size" %}</th>
+            <th>{% trans "Starting At" %}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr>
+            <td>
+              <strong>{{ product.name }}</strong>
+              {% if product.tagline %}<br><span class="pricing-tagline">{{ product.tagline }}</span>{% endif %}
+            </td>
+            <td>{{ product.diameter_display }}</td>
+            <td class="pricing-amount">${{ product.price_usd|floatformat:2 }}</td>
+            <td><a href="{{ product.get_absolute_url }}" class="btn btn-outline btn-sm">{% trans "Learn More" %}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title text-center">{% trans "Our Products" %}</h2>
+    <div class="product-grid">
+      {% for product in products %}
+      {% include "catalogue/_product_card.html" %}
+      {% endfor %}
+    </div>
+    <p class="text-center" style="margin-top:2rem">
+      <a href="{% url 'pages:contact' %}" class="btn btn-primary">{% trans "Request a Quote" %}</a>
+    </p>
+  </div>
+</section>
+{% endblock %}

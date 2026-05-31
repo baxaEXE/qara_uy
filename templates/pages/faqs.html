@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "FAQs" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "Frequently Asked Questions" %}</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow">
+    <dl class="faq-list">
+      {% for faq in faqs %}
+      <dt>{{ faq.question }}</dt>
+      <dd>{{ faq.answer }}</dd>
+      {% empty %}
+      <p>{% trans "No FAQs yet." %}</p>
+      {% endfor %}
+    </dl>
+    <p style="margin-top:2rem"><a href="{% url 'pages:contact' %}" class="btn btn-primary">{% trans "Still have questions? Contact us" %}</a></p>
+  </div>
+</section>
+{% endblock %}

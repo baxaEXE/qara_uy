@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "About Us" %}{% endblock %}
+
+{% block content %}
+<section class="hero hero-page">
+  <div class="container">
+    <h1>{% trans "About Us" %}</h1>
+    <p class="hero-subtitle">{% trans "Preserving Karakalpak Nomadic Architecture" %}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container narrow prose">
+    <p>{% trans "Qara Uy was founded to connect the world with the living tradition of Karakalpak felt dwellings. For centuries, our ancestors moved across the Ustyurt Plateau and the Amu Darya delta, carrying their homes on camel carts. Today we bring that same craftsmanship to modern landowners, resorts, and cultural projects." %}</p>
+    <p>{% trans "Our workshop collective includes master carpenters, felt makers, and shyrdak weavers from communities around Nukus and Muynak. Each qara uy kit is numbered and signed by the lead craftsman who oversaw its construction." %}</p>
+    <p>{% trans "We believe authentic architecture strengthens cultural identity. When you purchase a qara uy from us, you support fair wages for artisans and the continuation of endangered Karakalpak crafts." %}</p>
+    <a href="{% url 'pages:anatomy' %}" class="btn btn-outline">{% trans "Learn Qara Uy Anatomy →" %}</a>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% load i18n %}
+<nav class="language-bar" aria-label="{% trans 'Language' %}">
+  {% get_current_language as CURRENT_LANG %}
+  {% for lang in LANGUAGE_BAR %}
+  <form method="post" action="{% url 'set_language' %}" class="lang-form">
+    {% csrf_token %}
+    <input type="hidden" name="language" value="{{ lang.code }}">
+    <input type="hidden" name="next" value="{{ request.get_full_path }}">
+    <button
+      type="submit"
+      class="lang-link{% if lang.code == 'kaa' %} lang-link-long{% endif %}{% if CURRENT_LANG == lang.code %} is-active{% endif %}"
+      {% if lang.title %}title="{{ lang.title }}"{% endif %}
+    >{{ lang.label }}</button>
+  </form>
+  {% endfor %}
+</nav>
